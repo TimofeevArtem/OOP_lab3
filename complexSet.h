@@ -11,7 +11,7 @@ public:
     ComplexSet(const ComplexSet& set);
     ComplexSet(ComplexSet&& set) noexcept;
     ComplexSet& operator=(const ComplexSet& set);
-    ComplexSet& operator=(ComplexSet&& set);
+    ComplexSet& operator=(ComplexSet&& set) noexcept;
     ~ComplexSet();
 
     bool add(Complex complex);
@@ -22,8 +22,8 @@ public:
     std::size_t size() const;
     bool empty() const;
 
-    ComplexSet operator+=(const Complex& complex);
-    ComplexSet operator-=(const Complex& complex);
+    ComplexSet& operator+=(const Complex& complex);
+    ComplexSet& operator-=(const Complex& complex);
 
     ComplexSet operator|(const ComplexSet& set) const;
     ComplexSet operator&(const ComplexSet& set) const;
