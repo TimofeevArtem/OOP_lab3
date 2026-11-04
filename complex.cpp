@@ -1,6 +1,4 @@
 #include <iostream>
-#include <cstddef>
-#include <utility>
 #include "complex.h"
 
 
@@ -31,8 +29,9 @@ Complex::Complex(Complex &&complex) noexcept{
     complex.im_ = 0;
 }
 
-Complex& Complex::operator=(Complex& other){
-    swap(other);
+Complex& Complex::operator=(const Complex& other){
+    re_ = other.re_;
+    im_ = other.im_;
     return *this;
 }
 
@@ -72,9 +71,4 @@ std::ostream& operator<<(std::ostream& os, const Complex& complex){
     }
 
     return os;
-}
-
-void Complex::swap(Complex& other) noexcept{
-    std::swap(re_, other.re_);
-    std::swap(im_, other.im_);
 }

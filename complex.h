@@ -9,7 +9,7 @@ public:
     Complex(const Complex &complex);
     Complex(Complex &&complex) noexcept;
     ~Complex(){}
-    Complex& operator=(Complex& other);
+    Complex& operator=(const Complex& other);
 
     bool operator==(const Complex& complex) const;
     bool operator>(const Complex& complex) const;
@@ -19,6 +19,4 @@ public:
 private:
     float re_;
     float im_;
-
-    void swap(Complex &complex) noexcept;
 };
