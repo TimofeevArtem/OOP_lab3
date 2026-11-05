@@ -9,6 +9,6 @@ find_package(GTest REQUIRED)
 enable_testing()
 
 add_executable(main main.cpp complex.cpp complexSet.cpp)
-add_executable(complex_tests gtests.cpp complex.cpp)
+add_executable(complex_tests gtests.cpp complex.cpp complexSet.cpp)
 target_link_libraries(complex_tests PRIVATE GTest::gtest_main)
 add_test(NAME complex_tests COMMAND complex_tests)

@@ -4,12 +4,12 @@
 
 TEST(ComplexTest, DefaultConstructor){
     Complex c;
-    EXPECT_TRUE(c == complex(0, 0));
+    EXPECT_TRUE(c == Complex(0, 0));
 }
 
 TEST(ComplexTest, Constructors){
-    EXPECT_TRUE(complex(3) == complex(3, 0));
-    EXPECT_TRUE(complex(2, 4) == complex(2, 4));
+    EXPECT_TRUE(Complex(3) == Complex(3, 0));
+    EXPECT_TRUE(Complex(2, 4) == Complex(2, 4));
 }
 
 TEST(ComplexTest, CopyConstructor){
@@ -29,14 +29,14 @@ TEST(ComplexTest, Assignment){
 }
 
 TEST(ComplexTest, Equality){
-    EXPECT_TRUE(complex(2, 4) == complex(2, 4));
-    EXPECT_FALSE(complex(2, 4) == complex(2, 5));
+    EXPECT_TRUE(Complex(2, 4) == Complex(2, 4));
+    EXPECT_FALSE(Complex(2, 4) == Complex(2, 5));
 }
 
 TEST(ComplexTest, Ordering){
-    EXPECT_TRUE(complex(1, 5) < complex(2, 0));
-    EXPECT_TRUE(complex(2, 3) < complex(2, 4));
-    EXPECT_TRUE(complex(3, 0) > complex(2, 100));
+    EXPECT_TRUE(Complex(1, 5) < Complex(2, 0));
+    EXPECT_TRUE(Complex(2, 3) < Complex(2, 4));
+    EXPECT_TRUE(Complex(3, 0) > Complex(2, 100));
 }
 
 TEST(ComplexSetTest, DefaultConstructor){
@@ -49,9 +49,9 @@ TEST(ComplexSetTest, DefaultConstructor){
 TEST(ComplexSetTest, AddElements){
     ComplexSet set;
 
-    EXPECT_TRUE(set.add(complex(3, 0)));
-    EXPECT_TRUE(set.add(complex(1, 0)));
-    EXPECT_TRUE(set.add(complex(2, 0)));
+    EXPECT_TRUE(set.add(Complex(3, 0)));
+    EXPECT_TRUE(set.add(Complex(1, 0)));
+    EXPECT_TRUE(set.add(Complex(2, 0)));
 
     EXPECT_EQ(set.size(), 3);
 }
@@ -59,8 +59,8 @@ TEST(ComplexSetTest, AddElements){
 TEST(ComplexSetTest, AddDuplicate){
     ComplexSet set;
 
-    EXPECT_TRUE(set.add(complex(1, 2)));
-    EXPECT_FALSE(set.add(complex(1, 2)));
+    EXPECT_TRUE(set.add(Complex(1, 2)));
+    EXPECT_FALSE(set.add(Complex(1, 2)));
 
     EXPECT_EQ(set.size(), 1);
 }
@@ -68,61 +68,61 @@ TEST(ComplexSetTest, AddDuplicate){
 TEST(ComplexSetTest, Contains){
     ComplexSet set;
 
-    set.add(complex(1, 0));
-    set.add(complex(2, 0));
+    set.add(Complex(1, 0));
+    set.add(Complex(2, 0));
 
-    EXPECT_TRUE(set.contains(complex(1, 0)));
-    EXPECT_TRUE(set.contains(complex(2, 0)));
-    EXPECT_FALSE(set.contains(complex(3, 0)));
+    EXPECT_TRUE(set.contains(Complex(1, 0)));
+    EXPECT_TRUE(set.contains(Complex(2, 0)));
+    EXPECT_FALSE(set.contains(Complex(3, 0)));
 }
 
 TEST(ComplexSetTest, FunctionCallOperator){
     ComplexSet set;
-    set.add(complex(1, 2));
+    set.add(Complex(1, 2));
 
-    EXPECT_TRUE(set(complex(1, 2)));
-    EXPECT_FALSE(set(complex(3, 4)));
+    EXPECT_TRUE(set(Complex(1, 2)));
+    EXPECT_FALSE(set(Complex(3, 4)));
 }
 
 TEST(ComplexSetTest, Remove){
     ComplexSet set;
-    set.add(complex(1, 0));
-    set.add(complex(2, 0));
+    set.add(Complex(1, 0));
+    set.add(Complex(2, 0));
 
-    EXPECT_TRUE(set.remove(complex(1, 0)));
-    EXPECT_FALSE(set.remove(complex(1, 0)));
+    EXPECT_TRUE(set.remove(Complex(1, 0)));
+    EXPECT_FALSE(set.remove(Complex(1, 0)));
 
     EXPECT_EQ(set.size(), 1);
-    EXPECT_FALSE(set.contains(complex(1, 0)));
+    EXPECT_FALSE(set.contains(Complex(1, 0)));
 }
 
 TEST(ComplexSetTest, AddAndRemoveOperators){
     ComplexSet set;
 
-    set += complex(1, 0);
-    EXPECT_TRUE(set.contains(complex(1, 0)));
+    set += Complex(1, 0);
+    EXPECT_TRUE(set.contains(Complex(1, 0)));
 
-    set -= complex(1, 0);
-    EXPECT_FALSE(set.contains(complex(1, 0)));
+    set -= Complex(1, 0);
+    EXPECT_FALSE(set.contains(Complex(1, 0)));
 }
 
 TEST(ComplexSetTest, CopyConstructor){
     ComplexSet a;
-    a.add(complex(1, 0));
-    a.add(complex(2, 0));
+    a.add(Complex(1, 0));
+    a.add(Complex(2, 0));
 
     ComplexSet b(a);
 
     EXPECT_TRUE(a == b);
 
-    b.add(complex(3, 0));
+    b.add(Complex(3, 0));
 
     EXPECT_NE(a.size(), b.size());
 }
 
 TEST(ComplexSetTest, CopyAssignment){
     ComplexSet a;
-    a.add(complex(1, 0));
+    a.add(Complex(1, 0));
 
     ComplexSet b;
     b = a;
@@ -132,98 +132,98 @@ TEST(ComplexSetTest, CopyAssignment){
 
 TEST(ComplexSetTest, MoveConstructor){
     ComplexSet a;
-    a.add(complex(1, 0));
-    a.add(complex(2, 0));
+    a.add(Complex(1, 0));
+    a.add(Complex(2, 0));
 
     ComplexSet b(std::move(a));
 
     EXPECT_TRUE(a.empty());
     EXPECT_EQ(b.size(), 2);
-    EXPECT_TRUE(b.contains(complex(1, 0)));
+    EXPECT_TRUE(b.contains(Complex(1, 0)));
 }
 
 TEST(ComplexSetTest, MoveAssignment){
     ComplexSet a;
-    a.add(complex(1, 0));
+    a.add(Complex(1, 0));
 
     ComplexSet b;
     b = std::move(a);
 
     EXPECT_TRUE(a.empty());
     EXPECT_EQ(b.size(), 1);
-    EXPECT_TRUE(b.contains(complex(1, 0)));
+    EXPECT_TRUE(b.contains(Complex(1, 0)));
 }
 
 TEST(ComplexSetTest, Union){
     ComplexSet a;
-    a.add(complex(1, 0));
-    a.add(complex(2, 0));
-    a.add(complex(3, 0));
+    a.add(Complex(1, 0));
+    a.add(Complex(2, 0));
+    a.add(Complex(3, 0));
 
     ComplexSet b;
-    b.add(complex(2, 0));
-    b.add(complex(3, 0));
-    b.add(complex(4, 0));
+    b.add(Complex(2, 0));
+    b.add(Complex(3, 0));
+    b.add(Complex(4, 0));
 
     ComplexSet result = a | b;
 
     ComplexSet expected;
-    expected.add(complex(1, 0));
-    expected.add(complex(2, 0));
-    expected.add(complex(3, 0));
-    expected.add(complex(4, 0));
+    expected.add(Complex(1, 0));
+    expected.add(Complex(2, 0));
+    expected.add(Complex(3, 0));
+    expected.add(Complex(4, 0));
 
     EXPECT_TRUE(result == expected);
 }
 
 TEST(ComplexSetTest, Intersection){
     ComplexSet a;
-    a.add(complex(1, 0));
-    a.add(complex(2, 0));
-    a.add(complex(3, 0));
+    a.add(Complex(1, 0));
+    a.add(Complex(2, 0));
+    a.add(Complex(3, 0));
 
     ComplexSet b;
-    b.add(complex(2, 0));
-    b.add(complex(3, 0));
-    b.add(complex(4, 0));
+    b.add(Complex(2, 0));
+    b.add(Complex(3, 0));
+    b.add(Complex(4, 0));
 
     ComplexSet result = a & b;
 
     ComplexSet expected;
-    expected.add(complex(2, 0));
-    expected.add(complex(3, 0));
+    expected.add(Complex(2, 0));
+    expected.add(Complex(3, 0));
 
     EXPECT_TRUE(result == expected);
 }
 
 TEST(ComplexSetTest, Difference){
     ComplexSet a;
-    a.add(complex(1, 0));
-    a.add(complex(2, 0));
-    a.add(complex(3, 0));
+    a.add(Complex(1, 0));
+    a.add(Complex(2, 0));
+    a.add(Complex(3, 0));
 
     ComplexSet b;
-    b.add(complex(2, 0));
-    b.add(complex(3, 0));
-    b.add(complex(4, 0));
+    b.add(Complex(2, 0));
+    b.add(Complex(3, 0));
+    b.add(Complex(4, 0));
 
     ComplexSet result = a - b;
 
     ComplexSet expected;
-    expected.add(complex(1, 0));
+    expected.add(Complex(1, 0));
 
     EXPECT_TRUE(result == expected);
 }
 
 TEST(ComplexSetTest, EqualityAndInequality){
     ComplexSet a;
-    a.add(complex(1, 0));
+    a.add(Complex(1, 0));
 
     ComplexSet b;
-    b.add(complex(1, 0));
+    b.add(Complex(1, 0));
 
     ComplexSet c;
-    c.add(complex(2, 0));
+    c.add(Complex(2, 0));
 
     EXPECT_TRUE(a == b);
     EXPECT_FALSE(a != b);
@@ -233,7 +233,7 @@ TEST(ComplexSetTest, EqualityAndInequality){
 
 TEST(ComplexSetTest, OperationsWithEmptySet){
     ComplexSet a;
-    a.add(complex(1, 0));
+    a.add(Complex(1, 0));
 
     ComplexSet empty;
 
